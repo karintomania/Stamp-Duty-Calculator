@@ -26,3 +26,12 @@ the command below in the project root will run all the tests.
 ```
 ./vendor/bin/phpunit
 ```
+
+## Tech Used
+PHP 7.3
+HTML/CSS/Javascript
+Codeigniter 4
+PHPUnit 9
+Git
+Apache (Local)
+Heroku (Hosting)
