@@ -143,8 +143,8 @@ tr{
   position: relative;
   display: inline-block;
 }
-  /* Tooltip text */
-  .tooltip .tooltiptext {
+/* Tooltip text */
+.tooltip .tooltiptext {
 	visibility: hidden;
 	background-color: #5b5b5b;
 	color: #fff;
@@ -158,17 +158,21 @@ tr{
 	left: 0%;
 	margin-left: -60px;
 	z-index: 1;
-  }
-  
-  .tooltip .tooltiptext a{
+}
+
+.tooltip .tooltiptext a{
 	color: #ffffff;
-  }
-  .tooltip:hover .tooltiptext {
+}
+.tooltip:hover .tooltiptext {
 	visibility: visible;
-  }
+}
 
 
-  .errors {
-	  color: #ff8c8c;
-	  font-size: 20px;
-  }
+.errors {
+	color: #ff8c8c;
+	font-size: 20px;
+}
+
+.total{
+	font-weight: bold;
+}

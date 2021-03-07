@@ -5,11 +5,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/styles.css">
-	<title>Stamp Duty Calculater</title>
+	<title>Stamp Duty Calculator</title>
 </head>
 <body>
 <header>
-	<a href="#">Stamp Duty Calculater</a>
+	<a href="#">Stamp Duty Calculator</a>
 </header>
 <div class="container">
 	<form method="post" action="/">
@@ -50,12 +50,19 @@
 			<th>Stamp Duty</th>
 		</tr>
 		<?php foreach($table as $index=>$row) { ?>
-			<tr <?php if($index%2 === 1) print("class=\"odd\"") ?>>
-				<td><?= $row['range'] ?></td>
-				<td><?= $row['percent'] ?></td>
-				<td><?= $row['value'] ?></td>
-				<td><?= $row['stamp_duty'] ?></td>
-			</tr>
+			<?php if(isset($row['range'])) { ?>
+				<tr <?php if($index%2 === 1) print("class=\"odd\"") ?>>
+					<td><?= $row['range'] ?></td>
+					<td><?= $row['percent'] ?></td>
+					<td><?= $row['value'] ?></td>
+					<td><?= $row['stamp_duty'] ?></td>
+				</tr>
+			<?php }else{ // Total Stamp Duty ?>
+				<tr class="total">
+					<td colspan="3">Total</td>
+					<td><?= $row['stamp_duty'] ?></td>
+				</tr>
+			<?php } ?>
 		<?php } ?>
 	</table>
 	<?php } ?>

@@ -2,9 +2,9 @@
 
 namespace Tests\Support\Libraries;
 
-use App\Libraries\StampDutyCalculater;
+use App\Libraries\StampDutyCalculator;
 
-class StampDutyCalculaterTest extends \CodeIgniter\Test\CIUnitTestCase
+class StampDutyCalculatorTest extends \CodeIgniter\Test\CIUnitTestCase
 {
 	public function setUp(): void
 	{
@@ -13,7 +13,7 @@ class StampDutyCalculaterTest extends \CodeIgniter\Test\CIUnitTestCase
 
 	public function testFormatNumAdd()
 	{
-		$result = StampDutyCalculater::formatNum(1000000.01);
+		$result = StampDutyCalculator::formatNum(1000000.01);
 		$expected = "1,000,000.01";
 
 
@@ -31,7 +31,7 @@ class StampDutyCalculaterTest extends \CodeIgniter\Test\CIUnitTestCase
 
 		$value = 250000;
 		$isMain = true;
-		$result = StampDutyCalculater::Calculate($stamp_duty_condition, $value, $isMain);
+		$result = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
 		$expected = array(
 			"range" => "£500,000 - £925,000",
 			"percent" => "5%",
@@ -58,7 +58,7 @@ class StampDutyCalculaterTest extends \CodeIgniter\Test\CIUnitTestCase
 
 		$value = 700000;
 		$isMain = true;
-		$result = StampDutyCalculater::Calculate($stamp_duty_condition, $value, $isMain);
+		$result = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
 		$expected = array(
 			"range" => "£500,000 - £925,000",
 			"percent" => "5%",
@@ -84,7 +84,7 @@ class StampDutyCalculaterTest extends \CodeIgniter\Test\CIUnitTestCase
 
 		$value = 2000000;
 		$isMain = true;
-		$result = StampDutyCalculater::Calculate($stamp_duty_condition, $value, $isMain);
+		$result = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
 		$expected = array(
 			"range" => "£1,500,000 + ",
 			"percent" => "12%",
@@ -110,7 +110,7 @@ class StampDutyCalculaterTest extends \CodeIgniter\Test\CIUnitTestCase
 
 		$value = 2000000;
 		$isMain = true;
-		$result = StampDutyCalculater::Calculate($stamp_duty_condition, $value, $isMain);
+		$result = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
 		$expected = array(
 			"range" => "£925,000 - £1,500,000",
 			"percent" => "10%",
@@ -136,7 +136,7 @@ class StampDutyCalculaterTest extends \CodeIgniter\Test\CIUnitTestCase
 
 		$value = 550000;
 		$isMain = false;
-		$result = StampDutyCalculater::Calculate($stamp_duty_condition, $value, $isMain);
+		$result = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
 		$expected = array(
 			"range" => "£500,000 - £925,000",
 			"percent" => "8%",
@@ -151,4 +151,20 @@ class StampDutyCalculaterTest extends \CodeIgniter\Test\CIUnitTestCase
 
 	}
 
+	public function testCalculateTotalRow()
+	{
+		$table_data = array(
+			array("stamp_duty" => "100"),
+			array("stamp_duty" => "60,000"),
+			array("stamp_duty" => "0.5"),
+			array("stamp_duty" => "0"),
+		);
+		$result = StampDutyCalculator::calculateTotal($table_data);
+		$expected = array(
+			"stamp_duty" => "60,100.5"
+		);
+
+		$this->assertEquals($expected['stamp_duty'], $result['stamp_duty']);
+
+	}
 }

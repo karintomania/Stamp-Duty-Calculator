@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Libraries\StampDutyCalculater;
+use App\Libraries\StampDutyCalculator;
 
 class StampDutyController extends BaseController
 {
@@ -13,7 +13,7 @@ class StampDutyController extends BaseController
 		$data['value'] = 0;
 		$data['isMain'] = 1;
 
-		return view('calculater', $data);
+		return view('calculator', $data);
 	}
 
 
@@ -36,7 +36,7 @@ class StampDutyController extends BaseController
 			$data['isMain'] = 1;
 		}
 
-		return view('calculater', $data);
+		return view('calculator', $data);
 	}
 
 
@@ -52,12 +52,15 @@ class StampDutyController extends BaseController
 	private function calculateStampDuty($stamp_duty_conditions, $value, $isMain){
 
 		$table_data = array();
+		$total = 0;
 
 		foreach($stamp_duty_conditions as $stamp_duty_condition){
-			$table_row = StampDutyCalculater::Calculate($stamp_duty_condition, $value, $isMain);
+			$table_row = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
 			array_push($table_data, $table_row);
 		}
 
+		$total_row = StampDutyCalculator::calculateTotal($table_data);
+		array_push($table_data, $total_row);
 		return $table_data;
 	}
 
