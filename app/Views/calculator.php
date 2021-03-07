@@ -40,6 +40,7 @@
 			<li>
 				<input type="submit" class="button" value="Calculate">
 			</li>
+		</ul>
 	</form>
 	<table width="100%">
 	<?php if(count($table) > 0) { ?>
