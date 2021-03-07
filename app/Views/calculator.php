@@ -37,8 +37,8 @@
 				<?php if (!$isMain)print("checked=\"checked\"") ?>>
 				<label for="type2" class="radio_styled">Additional</label><br>
 			</li>
-				<?php if(isset($validation))print($validation->listErrors()); ?>
 		</ul>
+		<?php if(isset($validation))print($validation->listErrors()); ?>
 		<input type="submit" class="button" value="Calculate">
 	</form>
 	<table width="100%">
