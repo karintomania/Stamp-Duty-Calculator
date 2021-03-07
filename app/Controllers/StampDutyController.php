@@ -9,7 +9,7 @@ class StampDutyController extends BaseController
 
 	public function get()
 	{
-		$value = 0;
+		$value = NULL;
 		$isMain = 1;
 		$data['table'] = $this->calculateStampDuty(STAMP_DUTY_CONDITIONS, $value, $isMain);;
 		$data['value'] = $value;

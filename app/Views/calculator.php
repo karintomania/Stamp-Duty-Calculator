@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/styles.css">
+	<script type="text/javascript" src="/js/StampDutyController.js"></script>
 	<title>Stamp Duty Calculator</title>
 </head>
 <body>
@@ -12,11 +13,11 @@
 	<a href="#">Stamp Duty Calculator</a>
 </header>
 <div class="container">
-	<form method="post" action="/">
+	<form name="stampDutyForm" method="post" action="/">
 		<ul class="form_list">
 			<li class="value">
 				<label for="value" class="input_label">Property Value(£):</label>
-				<input id="value" type="number" name="value" value="<?= $value ?>" >
+				<input id="value" type="number" id="value" name="value" value="<?php if($value > 0) print($value) ?>" >
 			</li>
 			<li class="type">
 				<label for="type" class="input_label">Property Type:
@@ -29,18 +30,16 @@
 					</span>
 					</div>
 				</label>
-				<input type="radio" id="type1" name="type" value="1" 
+				<input type="radio" id="type1" name="type" value="1" onchange="submitForm();"
 				<?php if ($isMain)print("checked=\"checked\"") ?>>
 				<label for="type1" class="radio_styled">Main</label>
-				<input type="radio" id="type2" name="type" value="0"
+				<input type="radio" id="type2" name="type" value="0" onchange="submitForm();"
 				<?php if (!$isMain)print("checked=\"checked\"") ?>>
 				<label for="type2" class="radio_styled">Additional</label><br>
 			</li>
 				<?php if(isset($validation))print($validation->listErrors()); ?>
-			<li>
-				<input type="submit" class="button" value="Calculate">
-			</li>
 		</ul>
+		<input type="submit" class="button" value="Calculate">
 	</form>
 	<table width="100%">
 		<tr>
