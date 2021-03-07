@@ -85,8 +85,8 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest auto
  */
 
 const STAMP_DUTY_CONDITIONS = array(
-	array( "min" => 0,			"max" => 500000,	"percent_main" => 0,	"percent_additional" => 0.03),
-	array( "min" => 500000,		"max" => 925000,	"percent_main" => 0.05,	"percent_additional" => 0.08),
-	array( "min" => 925000,		"max" => 1500000,	"percent_main" => 0.1,	"percent_additional" => 0.13),
-	array( "min" => 1500000,	"max" => NULL,		"percent_main" => 0.12,	"percent_additional" => 0.15)
+	array( "min" => 0,			"max" => 500000,	"percent_main" => 0,	"percent_additional" => 0.03, "range_label" => "£0 - £500,000"),
+	array( "min" => 500000,		"max" => 925000,	"percent_main" => 0.05,	"percent_additional" => 0.08, "range_label" => "£500,001 - £925,000"),
+	array( "min" => 925000,		"max" => 1500000,	"percent_main" => 0.1,	"percent_additional" => 0.13, "range_label" => "£925,001 - £1,500,000"),
+	array( "min" => 1500000,	"max" => NULL,		"percent_main" => 0.12,	"percent_additional" => 0.15, "range_label" => "£1,500,000 + ")
 );

@@ -7,11 +7,10 @@ class StampDutyCalculator {
 	public static function calculate($stamp_duty_condition, $value, $isMain){
 		$percent_key = $isMain ? 'percent_main' : 'percent_additional';
 		// initialize table_row
-		$range = '£'.StampDutyCalculator::formatNum($stamp_duty_condition['min']).(isset($stamp_duty_condition['max'])?' - £'.StampDutyCalculator::formatNum($stamp_duty_condition['max']):' + ');
 		$percent = ($stamp_duty_condition[$percent_key]*100)."%";
 
 		$table_row = array(
-			"range" => $range,
+			"range" => $stamp_duty_condition['range_label'],
 			"percent" => $percent,
 			"value" => 0,
 			"stamp_duty" => 0

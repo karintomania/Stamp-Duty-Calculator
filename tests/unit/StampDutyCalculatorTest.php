@@ -16,8 +16,24 @@ class StampDutyCalculatorTest extends \CodeIgniter\Test\CIUnitTestCase
 		$result = StampDutyCalculator::formatNum(1000000.01);
 		$expected = "1,000,000.01";
 
-
 		$this->assertEquals($expected, $result);
+	}
+
+	public function testCalculateRangeLabel()
+	{
+		$stamp_duty_condition = array(
+			"min" => 500000,
+			"max" => 925000,
+			"percent_main" => 0.05,
+			"percent_additional" => 0.08,
+			"range_label" => "£500,001 - £925,000"
+		);
+
+		$value = 250000;
+		$isMain = true;
+		$result = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
+
+		$this->assertEquals($stamp_duty_condition['range_label'], $result['range']);
 	}
 
 	public function testCalculateValueLessThanMin()
@@ -26,20 +42,19 @@ class StampDutyCalculatorTest extends \CodeIgniter\Test\CIUnitTestCase
 			"min" => 500000,
 			"max" => 925000,
 			"percent_main" => 0.05,
-			"percent_additional" => 0.08
+			"percent_additional" => 0.08,
+			"range_label" => "£500,001 - £925,000"
 		);
 
 		$value = 250000;
 		$isMain = true;
 		$result = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
 		$expected = array(
-			"range" => "£500,000 - £925,000",
 			"percent" => "5%",
 			"value" => 0,
 			"stamp_duty" => 0
 		);
 
-		$this->assertEquals($expected['range'], $result['range']);
 		$this->assertEquals($expected['percent'], $result['percent']);
 		$this->assertEquals($expected['value'], $result['value']);
 		$this->assertEquals($expected['stamp_duty'], $result['stamp_duty']);
@@ -53,20 +68,20 @@ class StampDutyCalculatorTest extends \CodeIgniter\Test\CIUnitTestCase
 			"min" => 500000,
 			"max" => 925000,
 			"percent_main" => 0.05,
-			"percent_additional" => 0.08
+			"percent_additional" => 0.08,
+			"range_label" => "£500,001 - £925,000"
 		);
 
 		$value = 700000;
 		$isMain = true;
 		$result = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
 		$expected = array(
-			"range" => "£500,000 - £925,000",
+			"range" => "£500,001 - £925,000",
 			"percent" => "5%",
 			"value" => "200,000",
 			"stamp_duty" => "10,000"
 		);
 
-		$this->assertEquals($expected['range'], $result['range']);
 		$this->assertEquals($expected['percent'], $result['percent']);
 		$this->assertEquals($expected['value'], $result['value']);
 		$this->assertEquals($expected['stamp_duty'], $result['stamp_duty']);
@@ -79,20 +94,19 @@ class StampDutyCalculatorTest extends \CodeIgniter\Test\CIUnitTestCase
 			"min" => 1500000,
 			"max" => NULL,
 			"percent_main" => 0.12,
-			"percent_additional" => 0.15
+			"percent_additional" => 0.15,
+			"range_label" => "£1,500,000 +"
 		);
 
 		$value = 2000000;
 		$isMain = true;
 		$result = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
 		$expected = array(
-			"range" => "£1,500,000 + ",
 			"percent" => "12%",
 			"value" => "500,000",
 			"stamp_duty" => "60,000"
 		);
 
-		$this->assertEquals($expected['range'], $result['range']);
 		$this->assertEquals($expected['percent'], $result['percent']);
 		$this->assertEquals($expected['value'], $result['value']);
 		$this->assertEquals($expected['stamp_duty'], $result['stamp_duty']);
@@ -105,20 +119,19 @@ class StampDutyCalculatorTest extends \CodeIgniter\Test\CIUnitTestCase
 			"min" => 925000,
 			"max" => 1500000,
 			"percent_main" => 0.10,
-			"percent_additional" => 0.13
+			"percent_additional" => 0.13,
+			"range_label" => "£500,001 - £925,000"
 		);
 
 		$value = 2000000;
 		$isMain = true;
 		$result = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
 		$expected = array(
-			"range" => "£925,000 - £1,500,000",
 			"percent" => "10%",
 			"value" => "575,000",
 			"stamp_duty" => "57,500"
 		);
 
-		$this->assertEquals($expected['range'], $result['range']);
 		$this->assertEquals($expected['percent'], $result['percent']);
 		$this->assertEquals($expected['value'], $result['value']);
 		$this->assertEquals($expected['stamp_duty'], $result['stamp_duty']);
@@ -131,20 +144,19 @@ class StampDutyCalculatorTest extends \CodeIgniter\Test\CIUnitTestCase
 			"min" => 500000,
 			"max" => 925000,
 			"percent_main" => 0.05,
-			"percent_additional" => 0.08
+			"percent_additional" => 0.08,
+			"range_label" => "£500,001 - £925,000"
 		);
 
 		$value = 550000;
 		$isMain = false;
 		$result = StampDutyCalculator::calculate($stamp_duty_condition, $value, $isMain);
 		$expected = array(
-			"range" => "£500,000 - £925,000",
 			"percent" => "8%",
 			"value" => "50,000",
 			"stamp_duty" => "4,000"
 		);
 
-		$this->assertEquals($expected['range'], $result['range']);
 		$this->assertEquals($expected['percent'], $result['percent']);
 		$this->assertEquals($expected['value'], $result['value']);
 		$this->assertEquals($expected['stamp_duty'], $result['stamp_duty']);
