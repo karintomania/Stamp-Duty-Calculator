@@ -77,3 +77,16 @@ defined('EXIT_USER_INPUT')     || define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       || define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+/*
+ | --------------------------------------------------------------------------
+ | Stamp Duty System Constants
+ | --------------------------------------------------------------------------
+ */
+
+const STAMP_DUTY_CONDITIONS = array(
+	array( "min" => 0,			"max" => 500000,	"percent_main" => 0,	"percent_additional" => 0.03),
+	array( "min" => 500000,		"max" => 925000,	"percent_main" => 0.05,	"percent_additional" => 0.08),
+	array( "min" => 925000,		"max" => 1500000,	"percent_main" => 0.1,	"percent_additional" => 0.13),
+	array( "min" => 1500000,	"max" => NULL,		"percent_main" => 0.12,	"percent_additional" => 0.15)
+);
