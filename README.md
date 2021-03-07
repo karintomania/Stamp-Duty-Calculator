@@ -2,8 +2,7 @@
 A calculator for stamp duty.
 
 ## See the result on Heroku
-[See the website](https://gentle-peak-63414.herokuapp.com/)
-
+[See the website](https://stamp-duty.herokuapp.com/) 
 ## Getting Started
 Clone the git repository.
 ```
