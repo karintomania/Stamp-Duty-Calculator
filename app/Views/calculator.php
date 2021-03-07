@@ -43,7 +43,6 @@
 		</ul>
 	</form>
 	<table width="100%">
-	<?php if(count($table) > 0) { ?>
 		<tr>
 			<th>Range</th>
 			<th>Percent</th>
@@ -66,7 +65,6 @@
 			<?php } ?>
 		<?php } ?>
 	</table>
-	<?php } ?>
 </div>
 </body>
 </html>
