@@ -7,7 +7,7 @@ class StampDutyCalculater {
 	public static function Calculate($stamp_duty_condition, $value, $isMain){
 		$percent_key = $isMain ? 'percent_main' : 'percent_additional';
 		// initialize table_row
-		$range = '£'.$stamp_duty_condition['min'].(isset($stamp_duty_condition['max'])?' - £':' + ').$stamp_duty_condition['max'];
+		$range = '£'.StampDutyCalculater::formatNum($stamp_duty_condition['min']).(isset($stamp_duty_condition['max'])?' - £'.StampDutyCalculater::formatNum($stamp_duty_condition['max']):' + ');
 		$percent = ($stamp_duty_condition[$percent_key]*100)."%";
 
 		$table_row = array(
@@ -26,15 +26,21 @@ class StampDutyCalculater {
 		// property value is greater than min and less than max or max is undefined 
 		}else if($value > $stamp_duty_condition['min'] && ($value <= $stamp_duty_condition['max'] || $stamp_duty_condition['max'] === NULL) ){
 			$target_value = $value - $stamp_duty_condition['min'];
-			$table_row['value'] = $target_value;
-			$table_row['stamp_duty'] = $target_value * $stamp_duty_condition[$percent_key];
+			$stamp_duty = $target_value * $stamp_duty_condition[$percent_key];
+			$table_row['value'] = StampDutyCalculater::formatNum($target_value);
+			$table_row['stamp_duty'] = StampDutyCalculater::formatNum($stamp_duty);
 		// property value is greater than max
 		}else{
 			$target_value = $stamp_duty_condition['max'] - $stamp_duty_condition['min'];
-			$table_row['value'] = $target_value;
-			$table_row['stamp_duty'] = $target_value * $stamp_duty_condition[$percent_key];
+			$stamp_duty = $target_value * $stamp_duty_condition[$percent_key];
+			$table_row['value'] = StampDutyCalculater::formatNum($target_value);
+			$table_row['stamp_duty'] = StampDutyCalculater::formatNum($stamp_duty);
 		}
 
 	return $table_row;
+	}
+
+	public static function formatNum($num, $precision = 2) {
+		return number_format(floor($num)) . substr(str_replace(floor($num), '', $num), 0, $precision + 1);
 	}
 }

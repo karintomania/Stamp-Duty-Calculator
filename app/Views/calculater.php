@@ -23,7 +23,7 @@
 					<div class="tooltip">
 						<img class="hint" src="/question-mark-round.svg" alt="hint">
 						<span class="tooltiptext">
-							<a href="https://www.gov.uk/stamp-duty-land-tax/residential-property-rates" target="_blank">
+							<a href="https://www.gov.uk/hmrc-internal-manuals/stamp-duty-land-tax-manual/sdltm09812" target="_blank">
 								Click here for more details
 							</a>
 					</span>
