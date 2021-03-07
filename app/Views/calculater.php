@@ -5,14 +5,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/styles.css">
-	<title>Document</title>
+	<title>Stamp Duty Calculater</title>
 </head>
 <body>
 <header>
 	<a href="#">Stamp Duty Calculater</a>
 </header>
 <div class="container">
-	<form>
+	<form method="post" action="/">
 		<ul class="form_list">
 			<li class="value">
 				<label for="value" class="input_label">Property Value(£):</label>
@@ -36,11 +36,11 @@
 				<?php if (!$isMain)print("checked=\"checked\"") ?>>
 				<label for="type2" class="radio_styled">Additional</label><br>
 			</li>
+				<?php if(isset($validation))print($validation->listErrors()); ?>
 			<li>
 				<input type="submit" class="button" value="Calculate">
 			</li>
 	</form>
-
 	<table width="100%">
 	<?php if(count($table) > 0) { ?>
 		<tr>

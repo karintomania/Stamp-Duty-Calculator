@@ -166,3 +166,9 @@ tr{
   .tooltip:hover .tooltiptext {
 	visibility: visible;
   }
+
+
+  .errors {
+	  color: #ff8c8c;
+	  font-size: 20px;
+  }
